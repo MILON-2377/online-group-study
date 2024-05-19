@@ -1,11 +1,25 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const CreateAssignment = () => {
 
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, reset} = useForm();
 
     const hanldeCreateAssignment = (data) => {
-        console.log(data);
+        // console.log(data);
+        axios.post("http://localhost:5000/createassignment", {...data})
+        .then(() => {
+          Swal.fire({
+            title: "Assignment!",
+            text: "You assignment store the database successfully!",
+            icon: "success"
+          });
+            reset();
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
   return (
@@ -19,11 +33,7 @@ const CreateAssignment = () => {
         >
           <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-900 dark:bg-gray-50">
             <div className="space-y-2 col-span-full lg:col-span-1">
-              <p className="font-medium">Personal Inormation</p>
-              <p className="text-xs">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Adipisci fuga autem eum!
-              </p>
+              
             </div>
             <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
               <div className="col-span-full sm:col-span-3">
@@ -33,7 +43,7 @@ const CreateAssignment = () => {
                 <input
                   type="text"
                   placeholder="First name"
-                  {...register("name", {required: true})}
+                  {...register("userName", {required: true})}
                   className="w-full px-3 py-2 rounded-md focus:ring focus:ring-opacity-75 text-gray-900 dark:text-gray-50 focus:ring-violet-400 focus:dark:ring-violet-600 border-gray-700 dark:border-gray-300"
                 />
               </div>
@@ -44,7 +54,7 @@ const CreateAssignment = () => {
                 <input
                   type="email"
                   {...register("email", {required: true})}
-                  placeholder="email"
+                  placeholder="userEmail"
                   className="w-full mt-1 rounded-md px-3 py-2 focus:ring focus:ring-opacity-75 text-gray-900 dark:text-gray-50 focus:ring-violet-400 focus:dark:ring-violet-600 border-gray-700 dark:border-gray-300"
                 />
               </div>
@@ -77,14 +87,14 @@ const CreateAssignment = () => {
                 <input
                   type="text"
                   placeholder="imageURL"
-                  {...register("Thumbnail_Image", {required: true})}
+                  {...register("thumbnailImage", {required: true})}
                   className="w-full rounded-md px-3 py-2 focus:ring focus:ring-opacity-75 text-gray-900 dark:text-gray-50 focus:ring-violet-400 focus:dark:ring-violet-600 border-gray-700 dark:border-gray-300"
                 />
               </div>
 
-              <div className=" col-span-full sm:col-span-2 mt-2 ">
+              <div className=" col-span-full flex flex-col sm:col-span-2 ">
                 <span className="mt-1">Pick Difficulty</span>
-                <select {...register("Difficulty", {required: true})} className="px-3 py-2 rounded-md text-slate-400">
+                <select {...register("difficulty", {required: true})} className="px-3 py-[10px] rounded-md text-slate-400">
                   <option disabled selected>
                     Pick Difficulty
                   </option>
@@ -101,7 +111,7 @@ const CreateAssignment = () => {
                 <input
                   type="date"
                   placeholder="date"
-                  {...register("Due_date", {required: true})}
+                  {...register("dueDate", {required: true})}
                   className="w-full rounded-md px-3 py-2 focus:ring focus:ring-opacity-75 text-gray-900 dark:text-gray-50 focus:ring-violet-400 focus:dark:ring-violet-600 border-gray-700 dark:border-gray-300"
                 />
               </div>

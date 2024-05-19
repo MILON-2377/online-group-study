@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
+import Navbar from "../Pages/SharedPages/Navbar/Navbar";
 
 
 const RooPage = () => {
+    
     return (
         <div>
-            <h1 className="text-5xl">this is root page</h1>
+            <Navbar></Navbar>
             <Outlet></Outlet>
         </div>
     );
