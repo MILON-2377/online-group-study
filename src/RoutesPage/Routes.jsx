@@ -5,6 +5,7 @@ import LogIn from "../Pages/LogInRegister/LogIn/LogIn";
 import Register from "../Pages/LogInRegister/Register/Register";
 import Assignment from "../Pages/DisplayAssignments/Assignment";
 import Home from "../Pages/Home/Home";
+import UpdateAssignment from "../Pages/DisplayAssignments/UpdateAssignment/UpdateAssignment";
 
 export const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
             {
                 path: "/assignemnts",
                 element: <Assignment></Assignment>
+            },
+            {
+                path: "/updateAssignment",
+                element: <UpdateAssignment></UpdateAssignment>
             }
         ]
     }

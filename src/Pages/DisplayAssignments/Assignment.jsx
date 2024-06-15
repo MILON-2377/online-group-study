@@ -34,12 +34,12 @@ const Assignment = () => {
           <option value="Hard">Hard</option>
         </select>
       </div>
-      <div className=" lg:w-[80%] w-[95%] mx-auto px-6 bg-base-200 shadow-2xl rounded-xl mt-6 ">
+      <div className=" lg:w-[90%] w-[95%] mx-auto mt-6 ">
         <section className="  dark:bg-gray-100 text-gray-100">
           <div className="container p-6 mx-auto space-y-8">
             <div className="space-y-2 text-center">
-              <h2 className="text-3xl font-bold">Choose the assignments</h2>
-              <p className="font-serif text-sm text-gray-400 dark:text-gray-600">
+              <h2 className="text-3xl text-black font-bold">Choose the assignments</h2>
+              <p className="font-serif text-sm text-black dark:text-gray-600">
                 Choose the AssignMent
               </p>
             </div>

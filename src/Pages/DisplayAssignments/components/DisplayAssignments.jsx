@@ -1,6 +1,8 @@
 import Swal from "sweetalert2";
 import useAuthProvider from "../../../AuthProvider/useAuthProvider";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import updateAssingmenArr from "../../../Hooks/UpdateAssingment/updateAssignment";
 
 const DisplayAssignments = ({ assignmentData }) => {
   // console.log(assignmentData);
@@ -15,6 +17,8 @@ const DisplayAssignments = ({ assignmentData }) => {
     marks,
     email,
   } = assignmentData;
+
+  const navigate = useNavigate();
 
   // delete assignment which are made by himself
   const handleDeleteAssingment = (email, _id) => {
@@ -54,56 +58,68 @@ const DisplayAssignments = ({ assignmentData }) => {
     }
   };
 
-  return (
-    <article className="flex flex-col bg-gray-900 dark:bg-gray-50">
-      <a
-        rel="noopener noreferrer"
-        href="#"
-        aria-label="Te nulla oportere reprimique his dolorum"
-      >
-        <img
-          alt=""
-          className="object-cover w-full h-52 bg-gray-500 dark:bg-gray-500"
-          src="https://source.unsplash.com/200x200/?fashion?1"
-        />
-      </a>
-      <div className="flex flex-col flex-1 p-6">
-        <a
-          rel="noopener noreferrer"
-          href="#"
-          aria-label="Te nulla oportere reprimique his dolorum"
-        ></a>
-        <a
-          rel="noopener noreferrer"
-          href="#"
-          className="text-xs tracking-wider uppercase hover:underline text-violet-400 dark:text-violet-600"
-        >
-          <span className="mr-10">{title}</span>
-        </a>
+  // update assignment
+  const handleUpdateAssignment = (name) => {
+    // console.log(name);
+    updateAssingmenArr(name);
+    navigate("/updateAssignment"); 
+  };
 
-        <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">
-          {description}
-        </h3>
-        <div className="flex flex-wrap justify-between pt-3 space-x-2 text-white text-[16px] dark:text-gray-600">
-          <span>Difficulty</span>
-          <span>{difficulty}</span>
-        </div>
-        <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-gray-400 dark:text-gray-600">
-          <span>Due Date</span>
-          <span>{dueDate}</span>
-        </div>
-        <div className="w-full flex items-center justify-between gap-5 mt-5 ">
-          <button className="btn">View Assignment</button>
-          <button className="btn">Update</button>
-          <button
-            onClick={() => handleDeleteAssingment(email, _id)}
-            className="btn"
+  return (
+    <>
+      <article className="flex flex-col bg-gray-900 dark:bg-gray-50 rounded-lg overflow-hidden shadow-lg">
+        <a
+          href="#"
+          aria-label="View Assignment"
+          className="block relative h-48 md:h-64 overflow-hidden"
+        >
+          <img
+            alt="Assignment Thumbnail"
+            className="object-cover w-full h-full transform hover:scale-110 transition duration-300"
+            src="https://source.unsplash.com/200x200/?fashion?1"
+          />
+        </a>
+        <div className="flex flex-col flex-1 p-6">
+          <a
+            href="#"
+            className="text-xs tracking-wider uppercase hover:underline text-violet-400 dark:text-violet-600"
           >
-            Delete
-          </button>
+            {title}
+          </a>
+          <h3 className="py-2 text-lg font-semibold leading-snug text-gray-100 dark:text-gray-900">
+            {description}
+          </h3>
+          <div className="flex justify-between items-center pt-1">
+            <div className="flex items-center space-x-2 text-white text-sm dark:text-gray-600">
+              <span>Difficulty:</span>
+              <span>{difficulty}</span>
+            </div>
+            <div className="flex items-center space-x-2 text-xs text-gray-400 dark:text-gray-600">
+              <span>Due Date:</span>
+              <span>{dueDate}</span>
+            </div>
+          </div>
+          <div className="flex justify-end mt-4 space-x-3">
+            <button className="btn btn-sm bg-blue-500 hover:bg-blue-600 text-white">
+              View
+            </button>
+            <button
+              onClick={() => handleUpdateAssignment({_id, title, dueDate, difficulty, description, thumbnailUrl })}
+              className="btn btn-sm bg-gray-700 hover:bg-gray-800 text-white"
+            >
+              Update
+            </button>
+            <button
+              onClick={() => handleDeleteAssingment(email, _id)}
+              className="btn btn-sm bg-red-500 hover:bg-red-600 text-white"
+            >
+              Delete
+            </button>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+
+    </>
   );
 };
 
