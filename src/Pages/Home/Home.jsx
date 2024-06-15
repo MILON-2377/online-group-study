@@ -1,3 +1,6 @@
+import "animate.css/animate.min.css";
+import TestimonialsSection from "./HomeComponents/TestimonialSection";
+
 const Home = () => {
   return (
     <div>
@@ -20,27 +23,27 @@ const Home = () => {
               <h2 className="text-3xl font-bold">Features</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="bg-white p-6 rounded-lg shadow-md animate__animated animate__fadeInUp">
                 <h3 className="text-xl font-bold mb-2">Feature One</h3>
                 <p className="text-gray-700">Description of feature one.</p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="bg-white p-6 rounded-lg shadow-md animate__animated animate__fadeInUp animate__delay-1s">
                 <h3 className="text-xl font-bold mb-2">Feature Two</h3>
                 <p className="text-gray-700">Description of feature two.</p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="bg-white p-6 rounded-lg shadow-md animate__animated animate__fadeInUp animate__delay-2s">
                 <h3 className="text-xl font-bold mb-2">Feature Three</h3>
                 <p className="text-gray-700">Description of feature three.</p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="bg-white p-6 rounded-lg shadow-md animate__animated animate__fadeInUp animate__delay-3s">
                 <h3 className="text-xl font-bold mb-2">Feature Four</h3>
                 <p className="text-gray-700">Description of feature four.</p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="bg-white p-6 rounded-lg shadow-md animate__animated animate__fadeInUp animate__delay-4s">
                 <h3 className="text-xl font-bold mb-2">Feature Five</h3>
                 <p className="text-gray-700">Description of feature five.</p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="bg-white p-6 rounded-lg shadow-md animate__animated animate__fadeInUp animate__delay-5s">
                 <h3 className="text-xl font-bold mb-2">Feature Six</h3>
                 <p className="text-gray-700">Description of feature six.</p>
               </div>
@@ -103,6 +106,10 @@ const Home = () => {
           </div>
         </section>
 
+        {/* testimonial section */}
+        <div className="mb-9">
+          <TestimonialsSection></TestimonialsSection>
+        </div>
         {/* Footer */}
         <footer className="bg-white min-h-[300px] w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
