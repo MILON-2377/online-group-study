@@ -1,9 +1,11 @@
 import "animate.css/animate.min.css";
 import TestimonialsSection from "./HomeComponents/TestimonialSection";
+import useAuthProvider from "../../AuthProvider/useAuthProvider";
 
 const Home = () => {
+  const { isDarkMode,} = useAuthProvider();
   return (
-    <div>
+    <div className={isDarkMode ? "bg-black bg-opacity-80" : ""}>
       <div className="bg-gray-100">
         {/* Banner Section */}
         <section className="bg-blue-600 text-white">

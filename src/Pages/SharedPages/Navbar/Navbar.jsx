@@ -3,22 +3,27 @@ import useAuthProvider from "../../../AuthProvider/useAuthProvider";
 // import useAuthProvider from "../../../AuthProvider/useAuthProvider";
 
 const Navbar = () => {
-  const { user, userLogOut } = useAuthProvider();
+  const { user, userLogOut, isDarkeMode, setIsDarkMode } = useAuthProvider();
 
   const handleUserLoggOut = () => {
     userLogOut()
-    .then(res => {
-      console.log(res);
-    })
-    .catch(error => {
-      console.log(error);
-    })
-  }
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   return (
-    <div className="navbar bg-base-100">
+    <div className={ isDarkeMode ? "navbar bg-black text-white" : "navbar bg-base-100"}>
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">AssignMent</a>
+      </div>
+      <div className="flex items-center gap-3 justify-center w-full">
+        <span>{isDarkeMode ? "Dark Mode" : "Light Mode"}</span>
+        <input onClick={() => setIsDarkMode(!isDarkeMode)} type="checkbox" className="toggle"  />
       </div>
       <div className="flex-none gap-2">
         <div className=" hidden lg:flex items-center gap-4">
@@ -104,7 +109,10 @@ const Navbar = () => {
                     <li>Settings</li>
                   </NavLink>
 
-                  <li onClick={handleUserLoggOut} className=" px-3 py-1 hover:bg-gray-200 rounded-md ">
+                  <li
+                    onClick={handleUserLoggOut}
+                    className=" px-3 py-1 hover:bg-gray-200 rounded-md "
+                  >
                     Logout
                   </li>
                 </ul>
@@ -112,7 +120,10 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <NavLink to='/login' className="btn bg-slate-700 text-white font-bold ">
+              <NavLink
+                to="/login"
+                className="btn bg-slate-700 text-white font-bold "
+              >
                 LogIn
               </NavLink>
             </>

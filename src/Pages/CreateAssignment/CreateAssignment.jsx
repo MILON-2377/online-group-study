@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import LoadingPage from "../LoadingPage/LoadingPage";
+import useAuthProvider from "../../AuthProvider/useAuthProvider";
 
 const CreateAssignment = () => {
+  const {user} = useAuthProvider();
   const {
     register,
     handleSubmit,
@@ -26,6 +29,10 @@ const CreateAssignment = () => {
         console.log(error);
       });
   };
+
+  if(!user){
+    return <LoadingPage></LoadingPage>
+  }
 
   return (
     <div className="p-6 min-h-screen bg-gray-800 dark:bg-gray-100 text-gray-50 dark:text-gray-900">
