@@ -3,7 +3,12 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
 const CreateAssignment = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     // console.log(data);
@@ -38,10 +43,13 @@ const CreateAssignment = () => {
                   </label>
                   <input
                     type="text"
-                    {...register("userName", { required: true })}
+                    {...register("userName", { required: true, message: "You must have to fill up the name field" })}
                     placeholder="First Name"
                     className="input text-black w-full "
                   />
+                  {errors.userName && (
+                    <p className="mt-1 text-red-500">{errors.userName.message}</p>
+                  )}
                 </div>
                 <div className="flex flex-col w-full gap-1">
                   <label htmlFor="email" className="text-sm">
@@ -49,10 +57,13 @@ const CreateAssignment = () => {
                   </label>
                   <input
                     type="email"
-                    {...register("email", { required: true })}
+                    {...register("email", { required: true, message: "Email is required!!" })}
                     placeholder="Email"
                     className="input text-black w-full "
                   />
+                  {errors.email && (
+                    <p className="mt-1 text-red-500">{errors.email.message}</p>
+                  )}
                 </div>
               </div>
 
@@ -63,10 +74,16 @@ const CreateAssignment = () => {
                   </label>
                   <input
                     type="text"
-                    {...register("Title", { required: true })}
+                    {...register("Title", {
+                      required: true,
+                      message: "Title is required!",
+                    })}
                     placeholder="Title"
                     className="input w-full text-black  "
                   />
+                  {errors.Title && (
+                    <p className="mt-1 text-red-500">{errors.Title.message}</p>
+                  )}
                 </div>
 
                 <div className="col-span-1">
@@ -75,9 +92,17 @@ const CreateAssignment = () => {
                   </label>
                   <input
                     type="date"
-                    {...register("dueDate", { required: true })}
+                    {...register("dueDate", {
+                      required: true,
+                      message: "Due Date is required!!",
+                    })}
                     className="input text-black w-full "
                   />
+                  {errors.dueDate && (
+                    <p className="mt-1 text-red-500">
+                      {errors.dueDate.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -88,10 +113,18 @@ const CreateAssignment = () => {
                   </label>
                   <input
                     type="text"
-                    {...register("thumbnailImage", { required: true })}
+                    {...register("thumbnailImage", {
+                      required: true,
+                      message: "thumnail image is url is required!!",
+                    })}
                     placeholder="Thumbnail URL"
                     className="input w-full text-black "
                   />
+                  {errors.thumnailImage && (
+                    <p className="mt-1 text-red-500">
+                      {errors.thumnailImage.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="flex w-full flex-col gap-1">
@@ -99,7 +132,10 @@ const CreateAssignment = () => {
                     Difficulty
                   </label>
                   <select
-                    {...register("difficulty", { required: true })}
+                    {...register("difficulty", {
+                      required: true,
+                      message: "You must have to select one of difficulty !!",
+                    })}
                     className="input w-full text-black "
                   >
                     <option disabled defaultValue className="text-black">
@@ -109,6 +145,11 @@ const CreateAssignment = () => {
                     <option>Medium</option>
                     <option>Hard</option>
                   </select>
+                  {errors.difficulty && (
+                    <p className="mt-1 text-red-500">
+                      {errors.difficulty.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -118,10 +159,15 @@ const CreateAssignment = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("Description", { required: true })}
+                  {...register("Description", { required: true, message: "You must have to write some description!!" })}
                   placeholder="Description"
                   className="input w-full text-black"
                 />
+                {errors.Description && (
+                  <p className="mt-1 text-red-500">
+                    {errors.Description.message}
+                  </p>
+                )}
               </div>
             </div>
           </fieldset>
@@ -135,104 +181,3 @@ const CreateAssignment = () => {
 };
 
 export default CreateAssignment;
-
-{
-  /* <div className="p-6 w-full h-screen bg-gray-800 dark:bg-gray-100 text-gray-50 dark:text-gray-900">
-      <section className="p-6 bg-gray-800 dark:bg-gray-100 text-gray-50 dark:text-gray-900">
-        <form
-          onSubmit={handleSubmit((data) => {
-            hanldeCreateAssignment(data);
-          })}
-          className="container flex flex-col mx-auto space-y-12"
-        >
-          <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-900 dark:bg-gray-50">
-            <div className="space-y-2 col-span-full lg:col-span-1">
-              
-            </div>
-            <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
-              <div className="col-span-full sm:col-span-3">
-                <label htmlFor="firstname" className="text-sm">
-                  First name
-                </label>
-                <input
-                  type="text"
-                  placeholder="First name"
-                  {...register("userName", {required: true})}
-                  className="w-full px-3 py-2 rounded-md focus:ring focus:ring-opacity-75 text-gray-900 dark:text-gray-50 focus:ring-violet-400 focus:dark:ring-violet-600 border-gray-700 dark:border-gray-300"
-                />
-              </div>
-              <div className="col-span-full sm:col-span-3">
-                <label htmlFor="lastname" className="text-sm">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  {...register("email", {required: true})}
-                  placeholder="userEmail"
-                  className="w-full mt-1 rounded-md px-3 py-2 focus:ring focus:ring-opacity-75 text-gray-900 dark:text-gray-50 focus:ring-violet-400 focus:dark:ring-violet-600 border-gray-700 dark:border-gray-300"
-                />
-              </div>
-              <div className="col-span-full sm:col-span-3">
-                <label htmlFor="email" className="text-sm">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  {...register("Title", {required: true})}
-                  placeholder="Title"
-                  className="w-full mt-1 rounded-md px-3 py-2 focus:ring focus:ring-opacity-75 text-gray-900 dark:text-gray-50 focus:ring-violet-400 focus:dark:ring-violet-600 border-gray-700 dark:border-gray-300"
-                />
-              </div>
-              <div className="col-span-full">
-                <label htmlFor="address" className="text-sm">
-                  Description
-                </label>
-                <input
-                  type="text"
-                  placeholder="Descriptions"
-                  {...register("Description", {required: true})}
-                  className="w-full rounded-md mt-1 px-3 py-2 focus:ring focus:ring-opacity-75 text-gray-900 dark:text-gray-50 focus:ring-violet-400 focus:dark:ring-violet-600 border-gray-700 dark:border-gray-300"
-                />
-              </div>
-              <div className="col-span-full">
-                <label htmlFor="address" className="text-sm">
-                  Thumbnail URL
-                </label>
-                <input
-                  type="text"
-                  placeholder="imageURL"
-                  {...register("thumbnailImage", {required: true})}
-                  className="w-full rounded-md px-3 py-2 focus:ring focus:ring-opacity-75 text-gray-900 dark:text-gray-50 focus:ring-violet-400 focus:dark:ring-violet-600 border-gray-700 dark:border-gray-300"
-                />
-              </div>
-
-              <div className=" col-span-full flex flex-col sm:col-span-2 ">
-                <span className="mt-1">Pick Difficulty</span>
-                <select {...register("difficulty", {required: true})} className="px-3 py-[10px] rounded-md text-slate-400">
-                  <option disabled selected>
-                    Pick Difficulty
-                  </option>
-                  <option>Easy</option>
-                  <option>Medium</option>
-                  <option>Heard</option>
-                </select>
-              </div>
-
-              <div className="col-span-full mt-1 sm:col-span-2">
-                <label htmlFor="address" className="text-sm mt-1 ">
-                  Due date
-                </label>
-                <input
-                  type="date"
-                  placeholder="date"
-                  {...register("dueDate", {required: true})}
-                  className="w-full rounded-md px-3 py-2 focus:ring focus:ring-opacity-75 text-gray-900 dark:text-gray-50 focus:ring-violet-400 focus:dark:ring-violet-600 border-gray-700 dark:border-gray-300"
-                />
-              </div>
-            </div>
-          </fieldset>
-          <button className="btn btn-secondary ">Add Assignment</button>
-        </form>
-      </section>
-    </div> */
-}

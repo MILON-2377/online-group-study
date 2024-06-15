@@ -5,7 +5,12 @@ import { useState } from "react";
 
 const Register = () => {
   const { createUserWithEmail } = useAuthProvider();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const location = useLocation();
   const navigate = useNavigate();
   const [registerError, setRegisteError] = useState("");
@@ -39,10 +44,19 @@ const Register = () => {
               id="email"
               type="email"
               placeholder="Enter your email"
-              {...register("email", { required: true })}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Invalid email format",
+                },
+              })}
               className="input input-bordered w-full"
               required
             />
+            {errors.email && (
+              <p className="text-red-500">{errors.email.message}</p>
+            )}
           </div>
           <div className="form-control mt-4">
             <label htmlFor="password" className="label">
@@ -52,10 +66,24 @@ const Register = () => {
               id="password"
               type="password"
               placeholder="Enter your password"
-              {...register("password", { required: true })}
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters long",
+                },
+                pattern: {
+                  value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
+                  message:
+                    "Password must include at least one uppercase letter, one lowercase letter, and one digit",
+                },
+              })}
               className="input input-bordered w-full"
               required
             />
+            {errors.password && (
+              <p className="text-red-500 mt-1 ">{errors.password.message}</p>
+            )}
           </div>
           {registerError && (
             <span className="text-red-500 font-sans mt-2">{registerError}</span>

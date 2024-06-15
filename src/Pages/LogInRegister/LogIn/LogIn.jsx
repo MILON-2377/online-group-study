@@ -4,7 +4,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const LogIn = () => {
   const { logInUser, logInUserWithGoogle } = useAuthProvider();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -51,12 +55,16 @@ const LogIn = () => {
                 <span className="label-text">Email</span>
               </label>
               <input
-                {...register("email", { required: true })}
+                {...register("email", {
+                  required: true,
+                  pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                })}
                 type="email"
                 placeholder="Enter your email"
                 className="input input-bordered w-full"
                 required
               />
+              {errors.email && <p className="text-red-500">{errors.email.message}</p>}
             </div>
             <div className="form-control">
               <label htmlFor="password" className="label">
@@ -64,7 +72,11 @@ const LogIn = () => {
               </label>
               <input
                 type="password"
-                {...register("password", { required: true })}
+                {...register("password", {
+                  required: true,
+                  min: 6,
+                  pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
+                })}
                 placeholder="Enter your password"
                 className="input input-bordered text-black w-full"
                 required
