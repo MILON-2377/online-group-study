@@ -65,6 +65,14 @@ const DisplayAssignments = ({ assignmentData }) => {
     navigate("/updateAssignment"); 
   };
 
+
+  // assignment details handle
+  const handleViewAssignemnt =(name) => {
+    // console.log(name);
+    updateAssingmenArr(name);
+    navigate("/assignmentDetails");
+  }
+
   return (
     <>
       <article className="flex flex-col bg-gray-900 dark:bg-gray-50 rounded-lg overflow-hidden shadow-lg">
@@ -100,7 +108,7 @@ const DisplayAssignments = ({ assignmentData }) => {
             </div>
           </div>
           <div className="flex justify-end mt-4 space-x-3">
-            <button className="btn btn-sm bg-blue-500 hover:bg-blue-600 text-white">
+            <button onClick={() => handleViewAssignemnt({description, title, difficulty, dueDate, thumbnailUrl, marks})} className="btn btn-sm bg-blue-500 hover:bg-blue-600 text-white">
               View
             </button>
             <button
