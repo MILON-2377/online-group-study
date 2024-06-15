@@ -21,7 +21,7 @@ const MySubmittedAssignment = () => {
     }
   }, [data]);
 
-  if (isLoading) {
+  if (isLoading || !user) {
     return <LoadingPage></LoadingPage>;
   }
 

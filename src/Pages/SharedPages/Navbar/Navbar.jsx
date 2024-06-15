@@ -53,7 +53,7 @@ const Navbar = () => {
             create assignments
           </NavLink>
           <NavLink
-            to="/pendingassignment"
+            to="/pendingAssignments"
             className={({ isActive }) =>
               isActive
                 ? "border border-blue-400 rounded-md font-semi px-3 py-2 "

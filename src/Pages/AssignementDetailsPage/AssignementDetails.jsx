@@ -39,7 +39,7 @@ const AssignmentDetailsPage = () => {
         ...assignmentD,
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.insertedId) {
           Swal.fire({
             title: "Assignment Submitted!",
