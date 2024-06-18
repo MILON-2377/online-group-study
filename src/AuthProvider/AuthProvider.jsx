@@ -8,12 +8,14 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../FirebaseConfig/Firebase.Config";
+import usePublicApi from "../Hooks/PublicApi/usePublicApi";
 
 export const authContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isDarkeMode, setIsDarkMode] = useState(false);
+  const publicApi = usePublicApi();
 
   //user create in with email and password
   const createUserWithEmail = (email, password) => {
@@ -40,7 +42,25 @@ const AuthProvider = ({ children }) => {
   //iUser logged in
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      currentUser && setUser(currentUser);
+      if (currentUser) {
+        setUser(currentUser);
+
+        const email = currentUser.email;
+
+        publicApi
+          .post("/jwt", { email })
+          .then((res) => {
+            // console.log(res);
+            const token = res?.data?.token;
+            localStorage.setItem("user-token", token);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        setUser(null);
+        localStorage.setItem("user-token", null);
+      }
     });
 
     return () => unSubscribe();

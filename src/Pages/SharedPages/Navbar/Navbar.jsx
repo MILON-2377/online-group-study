@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import useAuthProvider from "../../../AuthProvider/useAuthProvider";
-// import useAuthProvider from "../../../AuthProvider/useAuthProvider";
+import toggleModeChange from "../../../Hooks/ToggleModeChange/togglingModeChange";
 
 const Navbar = () => {
   const { user, userLogOut, isDarkeMode, setIsDarkMode } = useAuthProvider();
@@ -15,15 +15,29 @@ const Navbar = () => {
       });
   };
 
+  const handleToggleModeChange = () => {
+    setTimeout(() => {
+      setIsDarkMode(!isDarkeMode);
+    }, 800);
+    toggleModeChange(isDarkeMode);
+  };
 
   return (
-    <div className={ isDarkeMode ? "navbar bg-black text-white" : "navbar bg-base-100"}>
+    <div
+      className={
+        isDarkeMode ? "navbar bg-black text-white" : "navbar bg-base-100"
+      }
+    >
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">AssignMent</a>
       </div>
       <div className="flex items-center gap-3 justify-center w-full">
         <span>{isDarkeMode ? "Dark Mode" : "Light Mode"}</span>
-        <input onClick={() => setIsDarkMode(!isDarkeMode)} type="checkbox" className="toggle"  />
+        <input
+          onClick={handleToggleModeChange}
+          type="checkbox"
+          className="toggle"
+        />
       </div>
       <div className="flex-none gap-2">
         <div className=" hidden lg:flex items-center gap-4">

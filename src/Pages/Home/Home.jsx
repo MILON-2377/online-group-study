@@ -1,12 +1,13 @@
 import "animate.css/animate.min.css";
 import TestimonialsSection from "./HomeComponents/TestimonialSection";
-import useAuthProvider from "../../AuthProvider/useAuthProvider";
+import toggleModeChange from "../../Hooks/ToggleModeChange/togglingModeChange";
 
 const Home = () => {
-  const { isDarkMode,} = useAuthProvider();
+  const toggle = toggleModeChange();
+
   return (
-    <div className={isDarkMode ? "bg-black bg-opacity-80" : ""}>
-      <div className="bg-gray-100">
+    <div className={toggle ? "bg-black bg-opacity-80" : ""}>
+      <div className={toggle ? "bg-black text-white" : "bg-gray-100"}>
         {/* Banner Section */}
         <section className="bg-blue-600 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
