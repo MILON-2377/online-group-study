@@ -40,7 +40,11 @@ export const router = createBrowserRouter([
 
       {
         path: "/assignemnts",
-        element: <Assignment></Assignment>,
+        element: (
+          <ProtectiveRoutse>
+            <Assignment></Assignment>
+          </ProtectiveRoutse>
+        ),
       },
       {
         path: "/updateAssignment",
