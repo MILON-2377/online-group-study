@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
         publicApi
           .post("/jwt", { email })
           .then((res) => {
-            // console.log(res);
+            console.log(res);
             const token = res?.data?.token;
             localStorage.setItem("user-token", token);
           })

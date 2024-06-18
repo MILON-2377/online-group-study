@@ -5,7 +5,7 @@ import LoadingPage from "../LoadingPage/LoadingPage";
 import ErrorPage from "../ErrorPage/ErrorPage";
 
 const MySubmittedAssignment = () => {
-  const { user } = useAuthProvider();
+  const { user, isDarkMode } = useAuthProvider();
   const [submittedAssignment, setSubmittedAssignment] = useState([]);
 
   const { data, isLoading, error } = useDataLoading(
@@ -15,7 +15,7 @@ const MySubmittedAssignment = () => {
   );
 
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
     if (data) {
       setSubmittedAssignment(data);
     }
@@ -30,7 +30,7 @@ const MySubmittedAssignment = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
+    <div className={isDarkMode ? "min-h-screen bg-black text-white py-8" :"min-h-screen bg-gray-100 py-8"}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold mb-6 text-gray-900">
           My Assignments

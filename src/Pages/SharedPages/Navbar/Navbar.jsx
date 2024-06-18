@@ -29,8 +29,71 @@ const Navbar = () => {
       }
     >
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">AssignMent</a>
+        <div className="drawer">
+          <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content mr-[120px] lg:mr-0 ">
+            {/* Page content here */}
+            <label
+              htmlFor="my-drawer"
+              className="btn btn-primary drawer-button"
+            >
+              Simplify Asssignments
+            </label>
+          </div>
+          <div className=" lg:hidden z-20 drawer-side">
+            <label
+              htmlFor="my-drawer"
+              aria-label="close sidebar"
+              className="drawer-overlay"
+            ></label>
+            <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+              {/* Sidebar content here */}
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "border border-blue-400 rounded-md font-semi px-3 py-2 "
+                    : "hover:bg-gray-50 px-3 py-2 rounded-md "
+                }
+              >
+                Home
+              </NavLink>
+
+              <NavLink
+                to="/assignemnts"
+                className={({ isActive }) =>
+                  isActive
+                    ? "border border-blue-400 rounded-md font-semi px-3 py-2 "
+                    : "hover:bg-gray-50 px-3 py-2 rounded-md "
+                }
+              >
+                assingments
+              </NavLink>
+              <NavLink
+                to="/createassignment"
+                className={({ isActive }) =>
+                  isActive
+                    ? "border border-blue-400 rounded-md font-semi px-3 py-2 "
+                    : "hover:bg-gray-50 px-3 py-2 rounded-md "
+                }
+              >
+                create assignments
+              </NavLink>
+              <NavLink
+                to="/pendingAssignments"
+                className={({ isActive }) =>
+                  isActive
+                    ? "border border-blue-400 rounded-md font-semi px-3 py-2 "
+                    : "hover:bg-gray-50 px-3 py-2 rounded-md "
+                }
+              >
+                pending assignments
+              </NavLink>
+            </ul>
+          </div>
+        </div>
       </div>
+
       <div className="flex items-center gap-3 justify-center w-full">
         <span>{isDarkeMode ? "Dark Mode" : "Light Mode"}</span>
         <input
@@ -113,14 +176,14 @@ const Navbar = () => {
                     <li>Profile</li>
                   </NavLink>
                   <NavLink
-                    to="/setting"
+                    to="/mySubmittedAssignmnets"
                     className={({ isActive }) =>
                       isActive
                         ? " text-white rounded-md font-semibold bg-slate-500 "
-                        : " px-3 py-1 hover:bg-gray-200 rounded-md "
+                        : " px-3 py-1 hover:bg-gray-200 rounded-md"
                     }
                   >
-                    <li>Settings</li>
+                    <li>My submitted assignments</li>
                   </NavLink>
 
                   <li

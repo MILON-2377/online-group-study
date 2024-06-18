@@ -61,7 +61,8 @@ const DisplayAssignments = ({ assignmentData }) => {
   // update assignment
   const handleUpdateAssignment = (name) => {
     // console.log(name);
-    updateAssingmenArr(name);
+    const firstName = "";
+    updateAssingmenArr({...name, firstName});
     navigate("/updateAssignment"); 
   };
 
@@ -113,7 +114,7 @@ const DisplayAssignments = ({ assignmentData }) => {
               View
             </button>
             <button
-              onClick={() => handleUpdateAssignment({_id, title, dueDate, difficulty, description, thumbnailUrl, firstName })}
+              onClick={() => handleUpdateAssignment({_id, title, dueDate, difficulty, description, thumbnailUrl,})}
               className="btn btn-sm bg-gray-700 hover:bg-gray-800 text-white"
             >
               Update

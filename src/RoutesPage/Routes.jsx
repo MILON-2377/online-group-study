@@ -10,6 +10,7 @@ import AssignmentDetailsPage from "../Pages/AssignementDetailsPage/AssignementDe
 import MySubmittedAssignment from "../Pages/MySubmittedAssignment/MySubmittedAssignment";
 import PendingAssignments from "../Pages/PendingAssignmetsPage/PendingAssignments";
 import ProtectiveRoutse from "../ProtectiveRoute/ProtectiveRoutse";
+import ProfilePage from "../Pages/ProfilePage/ProfilePage";
 
 export const router = createBrowserRouter([
   {
@@ -65,7 +66,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/mySubmittedAssignment",
+        path: "/mySubmittedAssignmnets",
         element: (
           <ProtectiveRoutse>
             {" "}
@@ -81,6 +82,10 @@ export const router = createBrowserRouter([
             <PendingAssignments></PendingAssignments>
           </ProtectiveRoutse>
         ),
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage></ProfilePage>,
       },
     ],
   },

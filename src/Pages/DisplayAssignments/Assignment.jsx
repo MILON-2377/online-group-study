@@ -32,8 +32,8 @@ const Assignment = () => {
   }, [data]);
 
   useEffect(() => {
-    console.log(filterName);
-    console.log(data);
+    // console.log(filterName);
+    // console.log(data);
     refetch();
   }, [currentPage, filterName]);
 

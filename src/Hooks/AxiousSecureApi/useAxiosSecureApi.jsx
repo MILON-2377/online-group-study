@@ -3,7 +3,7 @@ import useAuthProvider from "../../AuthProvider/useAuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const secureApi = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: "https://online-group-study-server-site-phi.vercel.app/",
 });
 
 const useAxiosSecureApi = () => {
