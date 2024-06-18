@@ -4,15 +4,15 @@ import DisplayAssignments from "./components/DisplayAssignments";
 import useDataLoading from "../../Hooks/SubmittedAssignmnetDataLoading/useDataLoading";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import ErrorPage from "../ErrorPage/ErrorPage";
-import { refFromURL } from "firebase/database";
 
 const Assignment = () => {
   const { user } = useAuthProvider();
   const [assignmentsData, setAssignmentsData] = useState([]);
   const [pages, setPages] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [filterName, setFilterName] = useState("");
   const { data, isLoading, error, refetch } = useDataLoading(
-    `/assignments?pages=${currentPage}`,
+    `/assignments?pages=${currentPage}&filterName=${filterName}`,
     "assignmnetsData",
     user?.email
   );
@@ -32,8 +32,10 @@ const Assignment = () => {
   }, [data]);
 
   useEffect(() => {
+    console.log(filterName);
+    console.log(data);
     refetch();
-  }, [currentPage]);
+  }, [currentPage, filterName]);
 
   const pagesHandle = (id) => {
     // console.log(id);
@@ -71,7 +73,7 @@ const Assignment = () => {
           <h1 className="text-3xl text-white ">
             Choose how do you see the assignments
           </h1>
-          <select className="px-3 py-3 bg-gray-100 rounded-md text-slate-600 font-serif ">
+          <select onChange={(e) => setFilterName(e.target.value)} className="px-3 py-3 bg-gray-100 rounded-md text-slate-600 font-serif ">
             <option
               disabled
               selected
